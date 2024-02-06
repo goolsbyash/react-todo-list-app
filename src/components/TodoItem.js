@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function TodoItem({todo, dispatch}) {
 const {title, id, completed} = todo;
 const [allowEdit, setAllowEdit] = useState(false);
+const [newTitle, setNewTitle] = useState("");
 const [deleteTodo, setDeleteTodo] = useState(id);
 const [markComplete, setMarkComplete] = useState(completed);
 
@@ -16,10 +17,14 @@ const handleComplete = (e) => {
     dispatch({ type: e.target.value, payload: { markComplete, id} });
 }
 
+const handleEdit = (e) => {
+setAllowEdit((allowEdit) => !allowEdit);
+}
+
   return (
     <ul>
       <li>
-        <div>{title}<button type="submit" value="EDIT">Edit</button></div> 
+        <div>{allowEdit ? (<><input type="text" placeholder="Edit Task"/><button type="submit">Save</button></>) : (<>{title} <button type="submit" onClick={handleEdit}>Edit</button></>)}</div> 
         <b> Completed:</b>
         <input type="checkbox" value="TOGGLE_COMPLETE" defaultChecked={markComplete} onChange={handleComplete}/>
         <br/>
