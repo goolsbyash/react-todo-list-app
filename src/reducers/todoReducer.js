@@ -13,12 +13,21 @@ export function todoReducer(state, action) {
       return state.filter((obj) => obj.id !== action.payload.deleteTodo);
     case "TOGGLE_COMPLETE": {
       return state.map((obj) => {
-          if (obj.id == action.payload.id) {
+          if (obj.id === action.payload.id) {
             console.log({ ...obj, completed: !action.payload.markComplete });
             return { ...obj, completed: !action.payload.markComplete };
           }
           return obj;
         });
+    }
+    case "EDIT": {
+        return state.map((obj) => {
+            if ((obj.id === action.payload.id) && (obj.title != action.payload.newTitle)){
+              console.log({...obj, title: action.payload.newTitle });
+              return { ...obj, title: action.payload.newTitle };
+            }
+            return obj;
+          });
     }
     default:
       return state;
