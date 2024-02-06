@@ -11,7 +11,9 @@ export function todoReducer(state, action) {
         },
         ...state,
       ];
-    default: return state;
+    case "DELETE":
+      return state.filter((obj) => obj.title !== action.payload.deleteTodo);
+    default:
+      return state;
   }
-  
 }
