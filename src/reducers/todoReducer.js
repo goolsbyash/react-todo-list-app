@@ -12,11 +12,10 @@ export function todoReducer(state, action) {
     case "DELETE":
       return state.filter((obj) => obj.id !== action.payload.deleteTodo);
     case "TOGGLE_COMPLETE": {
-      console.log(state);
-      console.log(action.payload.markComplete);
       return state.map((obj) => {
           if (obj.id == action.payload.id) {
-            return { ...obj, completed: !action.payload.completed };
+            console.log({ ...obj, completed: !action.payload.markComplete });
+            return { ...obj, completed: !action.payload.markComplete };
           }
           return obj;
         });
