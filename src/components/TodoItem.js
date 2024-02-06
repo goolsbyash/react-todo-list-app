@@ -16,7 +16,8 @@ const handleDelete = (e) => {
         <b> Completed:</b>
         <input type="checkbox" value="TOGGLE_COMPLETE" defaultChecked={todo.completed}/>
         <br/>
-        <button type="submit" value="DELETE" onClick={handleDelete}>Delete</button>
+        {/* conditional render; delete should only be available if task is marked completed */}
+        {todo.completed && <button type="submit" value="DELETE" onClick={handleDelete}>Delete</button>}
       </li>
     </ul>
   );
